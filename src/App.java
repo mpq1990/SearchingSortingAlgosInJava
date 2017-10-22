@@ -3,10 +3,16 @@ public class App {
 	
 	public static void main(String[] args) {
 		int[] array = {1, 3,5,6 ,7 ,67,777};
+		
 		int index = binarySearch(7775, array);
 		System.out.println(index);
+		
 //		reduceByOne(10);
+		
 		index = recursiveLinearSearch(array, 0, 67);
+		System.out.println(index);
+		
+		index = recursiveBinarySearch(array, 0, array.length - 1, 44);
 		System.out.println(index);
 	}
 	
@@ -40,8 +46,22 @@ public class App {
 		} else if (a[i] == x){
 			return i;
 		} else {
-			System.out.println(a + " aa " + i + " " + a[i] + " aa " + x );
 			return recursiveLinearSearch(a, i+1, x);
+		}
+	}
+	
+	public static int recursiveBinarySearch(int[] arr, int p, int r, int x){
+		if(p > r) {
+			return -1;
+		} else {
+			int q = (int) Math.floor((p+r)/2);
+			if(arr[q] == x){
+				return q;
+			} else if(arr[q] > x){
+				return recursiveBinarySearch(arr, p, q - 1, x);
+			} else {
+				return recursiveBinarySearch(arr, q + 1, r, x);
+			}
 		}
 	}
 }
