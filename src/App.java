@@ -3,6 +3,7 @@ public class App {
 	
 	public static void main(String[] args) {
 		int[] array = {1, 3,5,6 ,7 ,67,777};
+		int[] unsortedArray = {33, 2, 431, 23423, 3242,12,1,43};
 		
 		int index = binarySearch(7775, array);
 		System.out.println(index);
@@ -14,6 +15,12 @@ public class App {
 		
 		index = recursiveBinarySearch(array, 0, array.length - 1, 44);
 		System.out.println(index);
+		
+		int[] sorted = selectionsort(unsortedArray);
+		
+		for(int i = 0 ; i < sorted.length; i++){
+			System.out.print(sorted[i] + ",");
+		}
 	}
 	
 	private static int binarySearch(int key, int[] array) {
@@ -63,5 +70,24 @@ public class App {
 				return recursiveBinarySearch(arr, q + 1, r, x);
 			}
 		}
+	}
+	
+	public static int [] selectionsort(int [] unsortedArray){
+		int [] sortedArray = unsortedArray;
+		
+		for (int i = 0; i < unsortedArray.length; i++) {
+			int min = i;
+			
+			for(int j = i + 1; j < unsortedArray.length; j++) {
+				if(unsortedArray[j] < unsortedArray[min]){
+					min = j;
+				}
+			}
+			int temp = unsortedArray[i];
+			unsortedArray[i] = unsortedArray[min];
+			unsortedArray[min] = temp;
+		}
+		
+		return sortedArray;
 	}
 }
