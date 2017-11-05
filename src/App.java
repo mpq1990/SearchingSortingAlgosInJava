@@ -6,7 +6,7 @@ public class App {
 		int[] unsortedArray = {33, 2, 431, 23423, 3242,12,1,43};
 		int[] unsortedArrayTwo = {33, 2, 431, 23423, 3242,12,1,43};
 		int[] unsortedArrayThree = {33, 2, 431, 23423, 3242,12,1,43,5,5,5,5,5,5,5,65};
-		
+		int[] unsortedArrayFour = {33, 2, 431, 23423, 3242,12,1,43,5,5,5,5,5,5,5,65,55,44,33,2343};
 		
 		int index = binarySearch(7775, array);
 		System.out.println(index);
@@ -27,8 +27,18 @@ public class App {
 		mergeSort(unsortedArrayThree, 0, unsortedArrayThree.length - 1);
 		printArray(unsortedArrayThree);
 		
+		quickSort(unsortedArrayFour, 0, unsortedArrayFour.length - 1);
+		printArray(unsortedArrayFour);
+		
 	}
 	
+	/**
+	 * Binary Search
+	 * @param key
+	 * @param array
+	 * @return
+	 */
+
 	private static int binarySearch(int key, int[] array) {
 		int p = 0;
 		int r = array.length - 1;
@@ -46,12 +56,24 @@ public class App {
 		return -1;
 	}
 	
+	/**
+	 * just some recursion .. fur Fun ;)
+	 * @param n
+	 */
 	public static void reduceByOne(int n){
 		if( n != 0) {
 			reduceByOne(n - 1);
 		}
 		System.out.println(n);
 	}
+	
+	/**
+	 * recursive linear search
+	 * @param a
+	 * @param i
+	 * @param x
+	 * @return
+	 */
 	
 	public static int recursiveLinearSearch(int[] a ,  int i, int x) {
 		if (i > a.length - 1){
@@ -62,6 +84,15 @@ public class App {
 			return recursiveLinearSearch(a, i+1, x);
 		}
 	}
+	
+	/**
+	 * Recuirsive Binary serach
+	 * @param arr
+	 * @param p
+	 * @param r
+	 * @param x
+	 * @return
+	 */
 	
 	public static int recursiveBinarySearch(int[] arr, int p, int r, int x){
 		if(p > r) {
@@ -77,6 +108,13 @@ public class App {
 			}
 		}
 	}
+	
+	/**
+	 * 
+	 * Selection sort
+	 * @param unsortedArray
+	 * @return
+	 */
 	
 	public static int [] selectionsort(int [] unsortedArray){
 		int [] sortedArray = unsortedArray;
@@ -96,6 +134,12 @@ public class App {
 		
 		return sortedArray;
 	}
+	
+	/**
+	 * insertion sort
+	 * @param unsortedArray
+	 * @return
+	 */
 	
 	public static int [] insertionSort(int [] unsortedArray){
 		int [] sortedArray = unsortedArray;
@@ -170,9 +214,46 @@ public class App {
 		}
 		
 	}
-	//******************************End merge sort
+	
+	/**
+	 * 
+	 * @param array
+	 * @param start
+	 * @param end
+	 */
+
+	public static void quickSort(int[] array, int start, int end){
+		if(start < end){
+			int q = partition(array, start, end);
+			quickSort(array, start, q - 1);
+			quickSort(array, q + 1, end);
+		}	
+	}
+	
+	public static int partition(int[] array, int start, int end){
+		int pivot = array[end];
+		int i = start - 1;
+		
+		for(int j = start; j <= end - 1; j++){
+			if(array[j] <= pivot){
+				i = i + 1;
+				int temp = array[i];
+				array[i] = array[j];
+				array[j] = temp;
+			}
+		}
+		
+		int temp = array[i + 1];
+		array[i + 1] = pivot;
+		array[end] = temp;
+		return  i + 1;
+	}
 	
 	
+	/**
+	 * print the array
+	 * @param array
+	 */
 	public static void printArray(int[] array){
 		for(int i = 0 ; i < array.length; i++){
 			System.out.print(array[i] + ",");
